@@ -34,5 +34,4 @@ router.register('PostContent', views.PostContentView, 'PostContent')
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('quickstart/', include('quickstart.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
