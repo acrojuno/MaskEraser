@@ -139,13 +139,28 @@ class DataGenerator:
         is not provided or False it will return images from training part of dataset.
         If `test_dataset` parameter is True it will return images from testing part of dataset.
         """
+        
+        """
         if test_dataset:
             data_path = self.test_data_path
         else:
             data_path = self.train_data_path
+        """
 
+        data_path = 'C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/strv-ml-mask2face-master/media'
+
+        imgList = os.listdir(data_path)
+        images = []
+        for i in range (n-1, -1 , -1) :
+            images.append(imgList[-(1+i)])
+        inputs = [os.path.join(data_path, img) for img in images]
+        #outputs = [os.path.join(data_path, img) for img in images]
+        return inputs
+"""
         images = os.listdir(os.path.join(data_path, 'inputs'))
         images = random.sample(images, n)
         inputs = [os.path.join(data_path, 'inputs', img) for img in images]
         outputs = [os.path.join(data_path, 'outputs', img) for img in images]
         return inputs, outputs
+"""
+        

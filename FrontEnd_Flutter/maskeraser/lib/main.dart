@@ -18,7 +18,7 @@ Future<Response> sendForm(
     String url, Map<String, dynamic> data, Map<String, XFile?> files) async {
   Map<String, MultipartFile> fileMap = {};
   for (MapEntry fileEntry in files.entries) {
-    File file = fileEntry.value;
+    XFile file = fileEntry.value;
     String fileName = basename(file.path);
     fileMap[fileEntry.key] =
         MultipartFile(file.openRead(), await file.length(), filename: fileName);
@@ -34,7 +34,7 @@ Future<Response> sendForm(
  * accepts two parameters,the endpoint and the file
  * returns Response from server
  */
-Future<Response> sendFile(String url, XFile file) async {
+Future<Response> sendFile(String url, File file) async {
   Dio dio = new Dio();
   var len = await file.length();
   var response = await dio.post(url,
@@ -103,10 +103,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getImagefromGallery() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
+    print('upload started');
+
     //upload image
     //scenario  one - upload image as poart of formdata
-    var res1 = await sendForm('http://192.168.43.236:4082/create-profile',
-        {'name': 'iciruit', 'des': 'description'}, {'profile': image});
+    var res1 = await sendForm('http://10.0.2.2:8000/PostContent/',
+        {'title': 'ClientTest', 'text': '클라이언트테스트'}, {'image': image});
     print("res-1 $res1");
 
     setState(() {

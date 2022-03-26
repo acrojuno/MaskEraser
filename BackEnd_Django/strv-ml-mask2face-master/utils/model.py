@@ -198,7 +198,7 @@ class Mask2FaceModel(tf.keras.models.Model):
         # Find facial keypoints and crop the image to just the face
         keypoints = self.face_keypoints_detecting_fun(image)
         cropped_image = crop_face(image, keypoints)
-        print(cropped_image.size)
+        #print(cropped_image.size)
 
         # Resize image to input recognized by neural net
         resized_image = cropped_image.resize((256, 256))
