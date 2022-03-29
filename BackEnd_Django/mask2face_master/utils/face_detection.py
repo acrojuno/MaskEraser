@@ -9,7 +9,7 @@ from PIL import Image
 from mtcnn import MTCNN
 from trianglesolver import solve
 
-from utils import image_to_array
+from mask2face_master.utils import image_to_array
 
 
 def compute_slacks(height, width, hyp_ratio) -> Tuple[float, float]:

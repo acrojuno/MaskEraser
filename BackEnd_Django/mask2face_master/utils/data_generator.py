@@ -5,9 +5,9 @@ import bz2
 import random
 from tqdm.notebook import tqdm
 import shutil
-from utils import image_to_array, load_image, download_data
-from utils.face_detection import crop_face, get_face_keypoints_detecting_function
-from mask_utils.mask_utils import mask_image
+from mask2face_master.utils import image_to_array, load_image, download_data
+from mask2face_master.utils.face_detection import crop_face, get_face_keypoints_detecting_function
+from mask2face_master.mask_utils.mask_utils import mask_image
 
 
 class DataGenerator:
@@ -147,14 +147,20 @@ class DataGenerator:
             data_path = self.train_data_path
         """
 
-        data_path = 'C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/strv-ml-mask2face-master/media'
+        data_path = 'C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/mask2face_master/media'
 
         imgList = os.listdir(data_path)
         images = []
+        """
+        range (n-1, -1, -1)로 한 이유 :
+        range(0, n)으로 하면 선입선출이 아니라 선입후출이 되기 때문.
+        예를들어 이미지 A, B, C를 선택 해 본 함수를 돌린다고 가정 했을 때
+        range(0, n)라면 리턴 값이 C, B, A 순으로 나올 것이고
+        range (n-1, -1, -1)로 하면 A, B, C 순서 그대로 나온다
+        """
         for i in range (n-1, -1 , -1) :
             images.append(imgList[-(1+i)])
         inputs = [os.path.join(data_path, img) for img in images]
-        #outputs = [os.path.join(data_path, img) for img in images]
         return inputs
 """
         images = os.listdir(os.path.join(data_path, 'inputs'))

@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import Mask2faceDB
 
-class Mask2face(models.Model):
+class M2Fserializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
 
     class Meta:
         model = Mask2faceDB
-        fields = ('userId', 'number', 'image')
+        fields = ('userId',  'image', 'quantity')

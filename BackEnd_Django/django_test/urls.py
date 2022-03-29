@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.urls import include, path
 from rest_framework import routers
-from quickstart import views
+#qviews : quickstart 앱의 view, mviews : mask2face 앱의 view
+from quickstart import views as qviews
+from mask2face import views as mviews
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
@@ -25,9 +27,10 @@ from django.conf.urls.static import static
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register('PostContent', views.PostContentView, 'PostContent')
+router.register(r'users', qviews.UserViewSet)
+router.register(r'groups', qviews.GroupViewSet)
+router.register(r'PostContent', qviews.PostContentView, 'PostContent')
+router.register(r'MaskEraser', mviews.PostViewSet, 'MaskEraser')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

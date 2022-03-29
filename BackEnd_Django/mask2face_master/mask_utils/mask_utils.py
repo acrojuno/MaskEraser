@@ -12,8 +12,8 @@ import random
 from PIL import Image, ImageDraw, ImageColor, ImageFilter
 from configparser import ConfigParser
 
-from mask_utils.fit_ellipse import *
-from mask_utils.read_cfg import read_cfg
+from mask2face_master.mask_utils.fit_ellipse import *
+from mask2face_master.mask_utils.read_cfg import read_cfg
 
 COLOR = [
     "#fc1c1a",

@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from glob import glob
 from typing import Tuple, Optional
-from utils import load_image
+from mask2face_master.utils import load_image
 import random
 import cv2
 import numpy as np
@@ -11,8 +11,8 @@ from PIL import Image
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.utils import CustomObjectScope
-from utils.face_detection import get_face_keypoints_detecting_function, crop_face, get_crop_points
-from utils.architectures import UNet
+from mask2face_master.utils.face_detection import get_face_keypoints_detecting_function, crop_face, get_crop_points
+from mask2face_master.utils.architectures import UNet
 from tensorflow.keras.losses import MeanSquaredError, mean_squared_error
 
 
@@ -198,7 +198,13 @@ class Mask2FaceModel(tf.keras.models.Model):
         # Find facial keypoints and crop the image to just the face
         keypoints = self.face_keypoints_detecting_fun(image)
         cropped_image = crop_face(image, keypoints)
-        #print(cropped_image.size)
+        """
+        print(cropped_image.size)
+        -> 주피터 노트북 4번 'Results'를 Run 시키면
+        (445, 564) 이런 식으로 좌표값인지 사이즈값인지가
+        먼저 나온 다음에 사진 결과물이 떴는데
+        위 코드를 주석처리 하면 사이즈값 프린트 없이 바로 결과물이 나옴
+        """
 
         # Resize image to input recognized by neural net
         resized_image = cropped_image.resize((256, 256))

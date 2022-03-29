@@ -107,8 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //upload image
     //scenario  one - upload image as poart of formdata
-    var res1 = await sendForm('http://10.0.2.2:8000/PostContent/',
-        {'title': 'ClientTest', 'text': '클라이언트테스트'}, {'image': image});
+    var res1 = await sendForm('http://10.0.2.2:8000/MaskEraser/',
+        {'userId': 'testid', 'quantity': 1}, {'image': image});
     print("res-1 $res1");
 
     setState(() {
