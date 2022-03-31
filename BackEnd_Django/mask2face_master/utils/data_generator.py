@@ -23,6 +23,9 @@ class DataGenerator:
         self.train_data_path = configuration.get('train_data_path')
         self.test_data_path = configuration.get('test_data_path')
         self.predictor_path = configuration.get('landmarks_predictor_path')
+
+        self.server_media_path = configuration.get('server_media_path')
+
         self.check_predictor()
 
         self.valid_image_extensions = ('png', 'jpg', 'jpeg')
@@ -133,7 +136,7 @@ class DataGenerator:
         if save_to is None:
             return inputs, outputs
 
-    def get_dataset_examples(self, n=10, test_dataset=False):
+    def get_dataset_examples(self, userId, n=10, test_dataset=False):
         """
         Returns `n` random images form dataset. If `test_dataset` parameter
         is not provided or False it will return images from training part of dataset.
@@ -147,7 +150,7 @@ class DataGenerator:
             data_path = self.train_data_path
         """
 
-        data_path = 'C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/mask2face_master/media'
+        data_path = self.server_media_path + userId + '/input/'
 
         imgList = os.listdir(data_path)
         images = []

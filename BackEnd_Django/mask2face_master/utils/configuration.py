@@ -5,11 +5,11 @@ from dataclasses import dataclass
 
 @dataclass
 class Configuration:
-    def __init__(self, config_file_path: str = "configuration.json"):
+    def __init__(self, config_file_path: str = "C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/mask2face_master/configuration.json"):
         self.config_file_path = config_file_path
         self.config_json = None
         if os.path.exists(config_file_path):
-            with open(self.config_file_path, 'r') as json_file:
+            with open(self.config_file_path, 'rt', encoding='UTF8') as json_file:
                 self.config_json = json.load(json_file)
         else:
             print(f'ERROR: Configuration JSON {config_file_path} does not exist.')

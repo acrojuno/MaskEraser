@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from mask2face_master.utils.configuration import Configuration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -137,5 +138,8 @@ REST_FRAMEWORK = {
 
 #미디어 업로드 관련 코드
 #os 임포트 해줘야 함
-MEDIA_URL = 'C:/Users/junho/Documents/GitHub/django_test/media/'
+#configuration.json에 담겨진 내용 가져옴
+configuration = Configuration()
+server_media_path = configuration.get('server_media_path')
+MEDIA_URL = server_media_path
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

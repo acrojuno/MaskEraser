@@ -21,5 +21,10 @@
   "mask_filter_radius" : 2,
   "test_results_dir": "data/results/",
   "train_data_limit": 10000,
-  "test_data_limit": 1000
+  "test_data_limit": 1000,
+
+  "_comment_media_path_" : "장고 서버에서 지정된 미디어 폴더를 본인이 쓰는 PC 환경에 맞게 수정해주세요. 주의1 : 경로 마지막에 꼭 '/'를 붙여주세요. 주의2: 경로를 표시할 때 '/'를 써주세요(반대방향 짝대기 말고)",
+  "server_media_path" : "C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/media/",
+  "_comment_h5_path_" : "딥러닝 모델 파일(.h5) 파일의 경로를 본인이 쓰는 PC 환경에 맞게 수정해주세요. 주의1: 경로를 표시할 때 '/'를 써주세요(반대방향 짝대기 말고)",
+  "model_h5_path" : "C:/Users/junho/Documents/GitHub/django_test/BackEnd_Django/mask2face_master/models/model_epochs-20_batch-7_loss-ssim_l1_loss_20220202_17_50_38.h5"
 }

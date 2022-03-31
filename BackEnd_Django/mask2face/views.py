@@ -21,24 +21,36 @@ from mask2face_master.utils.data_generator import DataGenerator
 from mask2face_master.utils.model import Mask2FaceModel
 
 
-def maskEraser(n) :
-    model = Mask2FaceModel.load_model(r'C:\Users\junho\Documents\GitHub\django_test\BackEnd_Django\mask2face_master\models\model_epochs-20_batch-7_loss-ssim_l1_loss_20220202_17_50_38.h5')        
+def maskEraser(userId, n) :
     configuration = Configuration()
     dg = DataGenerator(configuration)
-        
-    input_imgs = dg.get_dataset_examples(n, test_dataset=False)
-    
-    output_imgs = []
-    for img in range(input_imgs):
-        output_imgs.append(model.predict(img))
 
-    return input_imgs, output_imgs
+    model_h5_path = configuration.get('model_h5_path')
+    model = Mask2FaceModel.load_model(model_h5_path)        
+    
+        
+    input_imgs = dg.get_dataset_examples(userId, n, test_dataset=False)
+    
+    server_media_path = configuration.get('server_media_path')
+    data_path =  server_media_path + userId + 'output'
+    """
+    #output_imgs = []
+    for img in range(input_imgs):
+        processed = model.predict(img)
+        processed.save(data_path, 'PNG')
+    """
+    
+
+    
+
 
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Mask2faceDB.objects.all()
     serializer_class = M2Fserializer
+    #test = Mask2faceDB.objects.get('userId')
+    #maskEraser(test, 1)
         
 
     
