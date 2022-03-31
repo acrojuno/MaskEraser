@@ -153,4 +153,5 @@ cython_debug/
 *.jpg
 *.png
 *.json
-configuration.py
+BackEnd_Django/mask2face_master/utils/configuration.py
+BackEnd_Django/mask2face_master/configuration.json
