@@ -155,3 +155,4 @@ cython_debug/
 *.json
 BackEnd_Django/mask2face_master/utils/configuration.py
 BackEnd_Django/mask2face_master/configuration.json
+BackEnd_Django/media
