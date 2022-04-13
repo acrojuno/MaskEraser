@@ -40,7 +40,8 @@ dependencies:
   flutter_screenutil: ^5.3.1
   #http 통신할 때 쓰는 패키지
   dio: ^4.0.4
-
+  #현재 날짜 및 시간 값 받을 수 있는 패키지
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,8 @@ import bz2
 import random
 from tqdm.notebook import tqdm
 import shutil
+import glob
+import heapq
 from mask2face_master.utils import image_to_array, load_image, download_data
 from mask2face_master.utils.face_detection import crop_face, get_face_keypoints_detecting_function
 from mask2face_master.mask_utils.mask_utils import mask_image
@@ -136,40 +138,52 @@ class DataGenerator:
         if save_to is None:
             return inputs, outputs
 
-    def get_dataset_examples(self, userId, n=10, test_dataset=False):
+
+    def get_dataset_path(self, userId, n=10, is_dataset_input = True, get_file_names = False):
         """
-        Returns `n` random images form dataset. If `test_dataset` parameter
-        is not provided or False it will return images from training part of dataset.
-        If `test_dataset` parameter is True it will return images from testing part of dataset.
+        본 함수는 사용자가 업로드한 이미지 파일들의 경로를 리턴해 주거나
+        변환된(마스크가 지워진) 이미지 파일들의 경로를 리턴해 주는 함수이다.
         """
+        """
+        파라미터 설명
+        userId : 유저의 ID
+        n = 유저가 요청한(업로드한) 파일의 개수
+        is_dataset_input : 리턴값으로 input 데이터(오리지널 이미지)를 원하는지(=True), output 데이터(변환된 이미지)를 원하는지(=False)
+        """
+
+        """
+        아래 data_path(이미지 경로)를 지정할 때
+        경로의 맨 마지막에 오는 final_path가
+        input이 될지 output이 될지 결정
+        """
+        if is_dataset_input == True :
+            final_path = '/input'
+        else :
+            final_path = '/output'
+
+        """
+        이미지 경로 지정
+        본인의 media 폴더 + 유저 ID + '/input/' 또는 '/output/'
+        """
+        data_path = self.server_media_path + userId + final_path
+
+        """
+        file_list : data_path 경로에 있는 모든 폴더명 및 파일명을 담은 리스트
+        latest_files : file_list에 있는 파일들 중 가장 최근에 업로드 된 n개의 파일들의 경로
+        """
+        file_list = glob.glob(data_path + '/*')
+        latest_files_path = heapq.nlargest(n, file_list, key = os.path.getctime)
         
         """
-        if test_dataset:
-            data_path = self.test_data_path
-        else:
-            data_path = self.train_data_path
+        final_names : latest_files_path에 있는 전체 파일 경로 중 파일명 부분만 떼어내 리스트에 저장
         """
+        file_names = [os.path.basename(i) for i in latest_files_path]
 
-        data_path = self.server_media_path + userId + '/input/'
-
-        imgList = os.listdir(data_path)
-        images = []
         """
-        range (n-1, -1, -1)로 한 이유 :
-        range(0, n)으로 하면 선입선출이 아니라 선입후출이 되기 때문.
-        예를들어 이미지 A, B, C를 선택 해 본 함수를 돌린다고 가정 했을 때
-        range(0, n)라면 리턴 값이 C, B, A 순으로 나올 것이고
-        range (n-1, -1, -1)로 하면 A, B, C 순서 그대로 나온다
+        본 함수의 매개변수 get_file_names의 값에 따라 리턴 값에 파일명 리스트를 포함시킬지 말지 결정
         """
-        for i in range (n-1, -1 , -1) :
-            images.append(imgList[-(1+i)])
-        inputs = [os.path.join(data_path, img) for img in images]
-        return inputs
-"""
-        images = os.listdir(os.path.join(data_path, 'inputs'))
-        images = random.sample(images, n)
-        inputs = [os.path.join(data_path, 'inputs', img) for img in images]
-        outputs = [os.path.join(data_path, 'outputs', img) for img in images]
-        return inputs, outputs
-"""
+        if get_file_names == True :
+            return latest_files_path, file_names       
+        else :
+            return latest_files_path
         

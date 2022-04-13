@@ -2,10 +2,14 @@ from django.db import models
 
 # Create your models here.
 
-def user_directory_path(instance, filename):
+def input_directory_path(instance, filename):
     return f'{instance.userId}/input/{filename}'
+
+def output_directory_path(instance, filename):
+    return f'{instance.userId}/outputt/{filename}'
 
 class Mask2faceDB(models.Model):
     userId = models.CharField(max_length=200)
-    image = models.ImageField(upload_to = user_directory_path)
+    input = models.ImageField(upload_to = input_directory_path)
+    output = models.ImageField(upload_to = output_directory_path, blank=True)
     quantity = models.IntegerField(null=True)

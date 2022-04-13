@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
+import 'package:intl/intl.dart';
 import 'dart:async';
 
 //http 이용해서 이미지 서버로 업로드 하는 함수
@@ -19,7 +20,7 @@ Future<Response> sendForm(
   Map<String, MultipartFile> fileMap = {};
   for (MapEntry fileEntry in files.entries) {
     XFile file = fileEntry.value;
-    String fileName = basename(file.path);
+    String fileName = path.basename(file.path);
     fileMap[fileEntry.key] =
         MultipartFile(file.openRead(), await file.length(), filename: fileName);
   }
@@ -34,6 +35,8 @@ Future<Response> sendForm(
  * accepts two parameters,the endpoint and the file
  * returns Response from server
  */
+
+/*
 Future<Response> sendFile(String url, File file) async {
   Dio dio = new Dio();
   var len = await file.length();
@@ -45,6 +48,16 @@ Future<Response> sendFile(String url, File file) async {
       ));
   return response;
 }
+*/
+/*
+Future<Response> get(String url) async {
+  Dio dio = new Dio();
+  try {
+    Response response = await dio.get(url);
+  }
+}
+*/
+
 
 
 void main() => runApp(MyApp());
@@ -103,12 +116,24 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getImagefromGallery() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
+    if(image != null) {
+      image.path;
+    }
+
+    /*
+    String dir = path.dirname(image!.path);
+    String now_date = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
+    String newName = path.join(dir, now_date);
+    File(image.path).renameSync(newName);
+     */
+
+
     print('upload started');
 
     //upload image
     //scenario  one - upload image as poart of formdata
-    var res1 = await sendForm('http://10.0.2.2:8000/MaskEraser/',
-        {'userId': 'testid', 'quantity': 1}, {'image': image});
+    var res1 = await sendForm('http://10.0.2.2:8000/Post/',
+        {'userId': 'testt', 'quantity': 1}, {'input': image});
     print("res-1 $res1");
 
     setState(() {

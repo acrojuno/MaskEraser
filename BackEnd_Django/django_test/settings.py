@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from http import server
 from pathlib import Path
 import os
 from mask2face_master.utils.configuration import Configuration
@@ -141,5 +142,5 @@ REST_FRAMEWORK = {
 #configuration.json에 담겨진 내용 가져옴
 configuration = Configuration()
 server_media_path = configuration.get('server_media_path')
-MEDIA_URL = server_media_path
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/mediaURL/'
+MEDIA_ROOT = server_media_path

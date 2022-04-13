@@ -30,11 +30,12 @@ router = routers.DefaultRouter()
 router.register(r'users', qviews.UserViewSet)
 router.register(r'groups', qviews.GroupViewSet)
 router.register(r'PostContent', qviews.PostContentView, 'PostContent')
-router.register(r'MaskEraser', mviews.PostViewSet, 'MaskEraser')
+router.register(r'Post', mviews.PostViewSet, 'Post')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('getoutput/', mviews.GetAPIView.as_view(), name = 'GetOutput'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
