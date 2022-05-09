@@ -11,13 +11,14 @@ class ProcessedView extends StatelessWidget {
     Key? key,
     required this.inputImg,
     String? outputPath,
-  }) : super(key: key);
 
   Future<File?> inputImg;
   //Future<File?>? outputImg;
+
   String? outputPath;
 
   Dio dio = new Dio();
+
 
   /*
     processImage(originalImg) {
@@ -41,6 +42,7 @@ class ProcessedView extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
+
               onPressed: () async {
                 shareImage(outputPath!);
               },

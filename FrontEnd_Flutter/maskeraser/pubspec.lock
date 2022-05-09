@@ -71,8 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-<<<<<<< Updated upstream
-=======
   ffi:
     dependency: transitive
     description:
@@ -87,7 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
->>>>>>> Stashed changes
   flutter:
     dependency: "direct main"
     description: flutter
@@ -113,11 +110,7 @@ packages:
       name: flutter_screenutil
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< Updated upstream
-    version: "5.3.1"
-=======
     version: "5.5.2"
->>>>>>> Stashed changes
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -219,8 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-<<<<<<< Updated upstream
-=======
   path_provider:
     dependency: "direct main"
     description:
@@ -284,7 +275,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
->>>>>>> Stashed changes
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -292,8 +282,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-<<<<<<< Updated upstream
-=======
   process:
     dependency: transitive
     description:
@@ -343,7 +331,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
->>>>>>> Stashed changes
   sky_engine:
     dependency: transitive
     description: flutter

@@ -1,0 +1,58 @@
+//임시로 만든 파일
+main.dart에 있는 잡다한 코드들
+ - 없어도 돌아가는데 지장이 없거나
+ - 앞으로 구현 예정인 코드들
+
+
+/**
+ * accepts two parameters,the endpoint and the file
+ * returns Response from server
+ */
+
+/*
+Future<Response> sendFile(String url, File file) async {
+  Dio dio = new Dio();
+  var len = await file.length();
+  var response = await dio.post(url,
+      data: file.openRead(),
+      options: Options(headers: {
+        Headers.contentLengthHeader: len,
+      } // set content-length
+      ));
+  return response;
+}
+*/
+/*
+Future<Response> get(String url) async {
+  Dio dio = new Dio();
+  try {
+    Response response = await dio.get(url);
+  }
+}
+*/
+
+/*
+class User {
+  String id;
+  String output; //image의 경로를 저장
+  int quantity;
+
+  User({
+    required this.id,
+    required this.output,
+    required this.quantity,
+  });
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      output: json['output'],
+      quantity: json['quantity'],
+    );
+  }
+
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'output': output, 'quantity': quantity};
+}
+
+ */
