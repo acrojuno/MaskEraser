@@ -1,18 +1,24 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:maskeraser/utils/processImage.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:maskeraser/utils/shareImage.dart';
 
 class ProcessedView extends StatelessWidget {
   ProcessedView({
     Key? key,
     required this.inputImg,
-  }) : super(key: key);
+    String? outputPath,
 
   Future<File?> inputImg;
   //Future<File?>? outputImg;
+
+  String? outputPath;
+
+  Dio dio = new Dio();
+
 
   /*
     processImage(originalImg) {
@@ -36,8 +42,9 @@ class ProcessedView extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
-              onPressed: () {
-                Share.share('check out my website https://example.com');
+
+              onPressed: () async {
+                shareImage(outputPath!);
               },
             ),
             IconButton(
@@ -98,10 +105,11 @@ class ProcessedView extends StatelessWidget {
                             msg: '이미지 변환 완료',
                             fontSize: 20,
                           );
+                          outputPath = snapshot.data! as String;
                           return Container(
                               color: Colors.black,
                               alignment: Alignment.center,
-                              child: Image.network(snapshot.data! as String));
+                              child: Image.network(outputPath!));
                         default:
                           return Text('default returned');
                       }
