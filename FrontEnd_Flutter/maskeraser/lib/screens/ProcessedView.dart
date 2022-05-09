@@ -11,6 +11,7 @@ class ProcessedView extends StatelessWidget {
     Key? key,
     required this.inputImg,
     String? outputPath,
+  }) : super(key: key);
 
   Future<File?> inputImg;
   //Future<File?>? outputImg;
