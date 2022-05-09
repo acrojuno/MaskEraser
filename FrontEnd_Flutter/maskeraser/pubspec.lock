@@ -225,6 +225,22 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
+
+    version: "1.8.0"
+  path_provider:
+    dependency: "direct main"
+    description:
+      name: path_provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.9"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+
     version: "2.0.13"
   path_provider_ios:
     dependency: transitive
@@ -389,6 +405,20 @@ packages:
     dependency: transitive
     description:
       name: vector_math
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
+  win32:
+    dependency: transitive
+    description:
+      name: win32
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.5.2"
+  xdg_directories:
+    dependency: transitive
+    description:
+      name: xdg_directories
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
