@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:maskeraser/utils/processImage.dart';
 import 'package:maskeraser/utils/shareImage.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 class ProcessedView extends StatelessWidget {
   ProcessedView({
@@ -50,7 +51,16 @@ class ProcessedView extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.save),
-              onPressed: () {},
+
+              onPressed: () async {
+                print("test");
+                print(outputPath!);
+                GallerySaver.saveImage(outputPath!)
+                    .then((value) => print('>>>> save value= $value'))
+                    .catchError((err) {
+                      print('error :( $err');
+                    });
+              },
             ),
           ]),
       body: Container(

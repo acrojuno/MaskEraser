@@ -50,6 +50,7 @@ dependencies:
   fluttertoast: ^8.0.9
   share_plus: ^4.0.4
   path_provider: ^2.0.9
+  gallery_saver: ^2.0.1
 
 dev_dependencies:
   flutter_test:
