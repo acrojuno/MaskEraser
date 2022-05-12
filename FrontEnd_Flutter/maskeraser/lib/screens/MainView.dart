@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:maskeraser/utils/GalleryThumbnail.dart';
@@ -21,20 +20,6 @@ class _MainViewState extends State<MainView> {
   String? _output_image;
   bool _isloading = false;
   Dio dio = new Dio();
-
-  Future<void> main() async {
-    // 디바이스에서 이용가능한 카메라 목록을 받아옵니다.
-    final cameras = await availableCameras();
-
-    // 이용가능한 카메라 목록에서 특정 카메라를 얻습니다.
-    final firstCamera = cameras.first;
-
-    runApp(
-        MaterialApp(
-          theme: ThemeData.dark(),
-          home: Camera(),
-        ),
-  }
 
   // 처음 실행 페이지: Home(1)
   int _pageIndex = 1;
