@@ -7,7 +7,7 @@ Dio dio = new Dio();
 Future<void> shareImage(String networkPath) async {
   final temp = await getTemporaryDirectory();
   final filePath = '${temp.path}/shareImage.jpg';
-  await dio.download(networkPath!, filePath);
+  await dio.download(networkPath, filePath);
   /*
   print('doanloadPath에 이미지 파일이 존재하냐? : '
       '${await File(networkPath).exists()}');
