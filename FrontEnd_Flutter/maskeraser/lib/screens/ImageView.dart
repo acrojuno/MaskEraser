@@ -13,13 +13,16 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Future <File?> originalImg;
 
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Colors.black,
         title: Text('Image View'),
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {Navigator.pop(context,true);}
+        ),
       ),
       body: Container(
         color: Colors.black,
@@ -27,6 +30,7 @@ class ImageView extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
+            //ImageView에 해당하는 이미지 띄우기
             FutureBuilder<File?>(
               future: imageFile,
               builder: (_, snapshot) {
@@ -39,12 +43,14 @@ class ImageView extends StatelessWidget {
             Container(
                 alignment: Alignment.bottomCenter,
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                //마스크 제거 버튼
                 child: ElevatedButton(
-                  onPressed: () => Navigator.push(
+                  onPressed: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ProcessedView(inputImg: imageFile),
+                      builder: (BuildContext context) => ProcessedView(inputImg: imageFile),
                     ),
+                        (route) => true,
                   ),
                   child: Icon(Icons.masks, size: 40),
                   style: ButtonStyle(
