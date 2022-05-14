@@ -157,3 +157,5 @@ BackEnd_Django/mask2face_master/utils/configuration.py
 BackEnd_Django/mask2face_master/configuration.json
 BackEnd_Django/media
 *.lock
+*.lock
+FrontEnd_Flutter/maskeraser/pubspec.lock

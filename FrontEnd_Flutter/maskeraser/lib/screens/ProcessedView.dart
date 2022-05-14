@@ -52,7 +52,8 @@ class ProcessedView extends StatelessWidget {
               icon: Icon(Icons.save),
               onPressed: () {},
             ),
-          ]),
+          ]
+      ),
       body: Container(
         color: Colors.black,
         //alignment: Alignment.center,
