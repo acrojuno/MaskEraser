@@ -51,6 +51,7 @@ dependencies:
   share_plus: ^4.0.4
   path_provider: ^2.0.9
   gallery_saver: ^2.0.1
+  introduction_screen: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,7 @@ flutter:
     - assets/images/posts/
     - assets/images/saved/
     - assets/images/story/
+    - assets/images/intro/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

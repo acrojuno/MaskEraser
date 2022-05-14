@@ -8,7 +8,6 @@ import 'package:photo_manager/photo_manager.dart';
 
 import 'package:maskeraser/screens/Home.dart';
 import 'package:maskeraser/screens/Camera.dart';
-import 'package:maskeraser/screens/Guide.dart';
 
 class MainView extends StatefulWidget {
   @override
@@ -33,17 +32,12 @@ class _MainViewState extends State<MainView> {
       icon: Icon(Icons.home),
       label: '홈',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.lightbulb),
-      label: '가이드',
-    ),
   ];
 
-  // 페이지 번호 -> Camera.dart : 0번, Home.dart : 1번, Guide.dart : 2번
+  // 페이지 번호 -> Camera.dart : 0번, Home.dart : 1번
   List<Widget> _widgetOptions = <Widget>[
     Camera(),
     Home(),
-    Guide(),
   ];
 
   // 버튼을 누르면, 해당하는 페이지 주소 int값을 반환

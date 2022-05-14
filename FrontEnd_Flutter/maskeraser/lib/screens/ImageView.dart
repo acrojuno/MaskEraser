@@ -40,11 +40,12 @@ class ImageView extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: ElevatedButton(
-                  onPressed: () => Navigator.push(
+                  onPressed: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ProcessedView(inputImg: imageFile),
+                      builder: (BuildContext context) => ProcessedView(inputImg: imageFile),
                     ),
+                        (route) => true,
                   ),
                   child: Icon(Icons.masks, size: 40),
                   style: ButtonStyle(
