@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:maskeraser/utils/processImage.dart';
 import 'package:maskeraser/utils/shareImageUrl.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,7 +19,6 @@ class ProcessedView extends StatelessWidget {
   }) : super(key: key);
 
   Future<File?> inputImg;
-  //Future<File?>? outputImg;
 
   String? outputPath;
 
@@ -28,38 +26,21 @@ class ProcessedView extends StatelessWidget {
 
   Dio dio = new Dio();
 
-
-  /*
-    processImage(originalImg) {
-    // TODO: implement processImage
-    throw UnimplementedError();
-  }
-   */
-
   @override
   Widget build(BuildContext context) {
-    print('프로세스드뷰 들어옴');
-    //File img = inputImg! as File;
-    //print(img.path);
-    print('완료');
-
     return Scaffold(
       appBar: AppBar(
           foregroundColor: Colors.white,
           backgroundColor: Colors.black,
           title: Text('Processed View'),
-
-
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
-
               onPressed: () async {
                 if (isRecent == true) {
                   File? file = await inputImg;
                   Share.shareFiles([file!.path]);
-                }
-                else {
+                } else {
                   shareImage(outputPath!);
                 }
               },
@@ -67,13 +48,14 @@ class ProcessedView extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.save),
               onPressed: () async {
-                  print("test");
-                  print(outputPath!);
-                  GallerySaver.saveImage(outputPath!)
-                      .then((value) => print('>>>> save value= $value'))
-                      .catchError((err) {
-                    print('error :( $err');
-                  });
+                const deviceDir = '/storage/emulated/0/Download/';
+                var name = await basename(outputPath!);
+                await dio.download(outputPath!, join(deviceDir, name));
+
+                Fluttertoast.showToast(
+                  msg: '다운로드 완료',
+                  fontSize: 20,
+                );
               },
             ),
           ]),
@@ -98,13 +80,13 @@ class ProcessedView extends StatelessWidget {
                     ),
                   );
                 } else {
-                  switch(isRecent){
-                    case true :
+                  switch (isRecent) {
+                    case true:
                       return Container(
                           color: Colors.black,
                           alignment: Alignment.center,
                           child: Image.file(inputFile as File));
-                    default :
+                    default:
                       return FutureBuilder(
                         future: processImage(inputFile as File),
                         builder: (context, snapshot) {
@@ -139,7 +121,6 @@ class ProcessedView extends StatelessWidget {
                         },
                       );
                   }
-
                 }
               },
             ),

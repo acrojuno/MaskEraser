@@ -13,7 +13,6 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -21,8 +20,9 @@ class ImageView extends StatelessWidget {
         title: Text('Image View'),
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
-            onPressed: () {Navigator.pop(context,true);}
-        ),
+            onPressed: () {
+              Navigator.pop(context, true);
+            }),
       ),
       body: Container(
         color: Colors.black,
@@ -45,18 +45,20 @@ class ImageView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 //마스크 제거 버튼
                 child: ElevatedButton(
-                  onPressed: () => Navigator.push(
+                  onPressed: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ProcessedView(inputImg: imageFile),
+                      builder: (BuildContext context) =>
+                          ProcessedView(inputImg: imageFile),
                     ),
+                    (route) => true,
                   ),
                   child: Icon(Icons.masks, size: 40),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(CircleBorder()),
                     minimumSize: MaterialStateProperty.all(Size(60, 60)),
                     overlayColor:
-                    MaterialStateProperty.resolveWith<Color?>((states) {
+                        MaterialStateProperty.resolveWith<Color?>((states) {
                       if (states.contains(MaterialState.pressed))
                         return Colors.green;
                     }),
