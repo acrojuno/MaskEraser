@@ -82,6 +82,45 @@ class _HomeState extends State<Home> {
                       image: DecorationImage(
                         image: AssetImage(story['story']),
                         fit: BoxFit.cover,
+=======
+            Container(
+              height: 150,
+              //최근 이미지 위젯(가로 스크롤)
+              child: ListView.builder(
+                padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
+                //physics: NeverScrollableScrollPhysics(),
+                physics: ScrollPhysics(),
+                itemCount: entities.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  FileSystemEntity entity = entities[index];
+                  Future<File?>? selectedImg;
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    child: InkWell(
+                      onTap: () async {
+                        selectedImg = File(entity.path).create();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ProcessedView(
+                              inputImg: selectedImg!,
+                              isRecent: true,
+                            ),
+                          ),
+                        ).then((value) => {});
+                      },
+                      child: Container(
+                        height: 150,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: Image.file(File(entity.path)).image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+>>>>>>> Stashed changes
                       ),
                     ),
                   ),
