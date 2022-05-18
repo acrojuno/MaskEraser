@@ -31,7 +31,7 @@ class _GuideViewState extends State<GuideView> {
       bodyTextStyle: bodyStyle,
       //bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
-      imagePadding: EdgeInsets.fromLTRB(16.0, 22.0, 16.0, 16.0),
+      imagePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
     );
 
     return SafeArea(
@@ -44,30 +44,31 @@ class _GuideViewState extends State<GuideView> {
               body: "마스크를 제거하고 싶은 이미지를 갤러리에서 선택!",
               image: _buildImage('img1.png'),
               decoration: pageDecoration.copyWith(
-                bodyFlex: 1,
-                imageFlex: 5,
-                bodyAlignment: Alignment.bottomCenter,
-                imageAlignment: Alignment.topCenter,
+                bodyFlex: 3,
+                imageFlex: 10,
+                bodyAlignment: Alignment.center,
+                imageAlignment: Alignment.center,
+
               )),
           PageViewModel(
               title: "2. 마스크 제거",
               body: "파란색 마스크 제거 버튼 클릭!",
               image: _buildImage('img2.png'),
               decoration: pageDecoration.copyWith(
-                bodyFlex: 1,
-                imageFlex: 5,
-                bodyAlignment: Alignment.bottomCenter,
-                imageAlignment: Alignment.topCenter,
+                bodyFlex: 3,
+                imageFlex: 10,
+                bodyAlignment: Alignment.center,
+                imageAlignment: Alignment.center,
               )),
           PageViewModel(
             title: "3. 확인",
             body: "변환된 이미지가 만족스럽다면 저장, 공유 기능을 활용하세요!",
             image: _buildImage('img3.png'),
             decoration: pageDecoration.copyWith(
-              bodyFlex: 1,
-              imageFlex: 5,
-              bodyAlignment: Alignment.bottomCenter,
-              imageAlignment: Alignment.topCenter,
+              bodyFlex: 3,
+              imageFlex: 10,
+              bodyAlignment: Alignment.center,
+              imageAlignment: Alignment.center,
             ),
           ),
         ],

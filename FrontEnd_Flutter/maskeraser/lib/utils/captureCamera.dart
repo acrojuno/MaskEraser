@@ -6,7 +6,7 @@ import 'package:maskeraser/utils/getImageFromCamera.dart';
 
 Future captureCamera(BuildContext context) async {
   Future<File?> img = getImagefromcamera();
-  await Future.delayed(Duration(milliseconds: 1000));
+
   Navigator.push(
     context,
     MaterialPageRoute(
