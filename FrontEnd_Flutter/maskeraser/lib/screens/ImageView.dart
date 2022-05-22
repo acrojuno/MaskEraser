@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:maskeraser/screens/ProcessedView.dart';
 
 class ImageView extends StatelessWidget {
@@ -13,7 +14,6 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -21,8 +21,9 @@ class ImageView extends StatelessWidget {
         title: Text('Image View'),
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
-            onPressed: () {Navigator.pop(context,true);}
-        ),
+            onPressed: () {
+              Navigator.pop(context, true);
+            }),
       ),
       body: Container(
         color: Colors.black,
@@ -48,16 +49,17 @@ class ImageView extends StatelessWidget {
                   onPressed: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) => ProcessedView(inputImg: imageFile),
+                      builder: (BuildContext context) =>
+                          ProcessedView(inputImg: imageFile),
                     ),
-                        (route) => true,
+                    (route) => true,
                   ),
                   child: Icon(Icons.masks, size: 40),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(CircleBorder()),
                     minimumSize: MaterialStateProperty.all(Size(60, 60)),
                     overlayColor:
-                    MaterialStateProperty.resolveWith<Color?>((states) {
+                        MaterialStateProperty.resolveWith<Color?>((states) {
                       if (states.contains(MaterialState.pressed))
                         return Colors.green;
                     }),

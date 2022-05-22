@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gallery_saver/gallery_saver.dart';
-import 'package:maskeraser/utils/processImage.dart';
-import 'package:maskeraser/utils/shareImageUrl.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:path/path.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'package:maskeraser/utils/processImage.dart';
+import 'package:maskeraser/utils/shareImageUrl.dart';
 
 class ProcessedView extends StatelessWidget {
   ProcessedView({
@@ -20,7 +20,6 @@ class ProcessedView extends StatelessWidget {
   }) : super(key: key);
 
   Future<File?> inputImg;
-  //Future<File?>? outputImg;
 
   String? outputPath;
 
@@ -28,21 +27,8 @@ class ProcessedView extends StatelessWidget {
 
   Dio dio = new Dio();
 
-
-  /*
-    processImage(originalImg) {
-    // TODO: implement processImage
-    throw UnimplementedError();
-  }
-   */
-
   @override
   Widget build(BuildContext context) {
-    print('프로세스드뷰 들어옴');
-    //File img = inputImg! as File;
-    //print(img.path);
-    print('완료');
-
     return Scaffold(
       appBar: AppBar(
           foregroundColor: Colors.white,
@@ -53,27 +39,37 @@ class ProcessedView extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
-
               onPressed: () async {
                 if (isRecent == true) {
                   File? file = await inputImg;
                   Share.shareFiles([file!.path]);
-                }
-                else {
+                } else {
                   shareImage(outputPath!);
                 }
               },
             ),
             IconButton(
-              icon: Icon(Icons.save),
+              icon: Icon(Icons.save), //저장 버튼
               onPressed: () async {
-                  print("test");
-                  print(outputPath!);
-                  GallerySaver.saveImage(outputPath!)
-                      .then((value) => print('>>>> save value= $value'))
-                      .catchError((err) {
-                    print('error :( $err');
-                  });
+                //저장소 권한 확인
+                var status = await Permission.storage.status;
+                if (!status.isGranted) {
+                  await Permission.storage.request();
+                }
+
+                //기기 내 다운로드 폴더 지정
+                const deviceDir = 'storage/self/primary/Download/';
+
+                //앱 내부 'ListViewImages' 폴더에 있는 해당 파일을 복사
+                File? file = await inputImg;
+                var name = await basename(file!.path);
+                file.copy('$deviceDir/$name');
+
+                //다운로드 완료 토스트 메시지 출력
+                Fluttertoast.showToast(
+                  msg: '다운로드 완료',
+                  fontSize: 20,
+                );
               },
             ),
           ]
@@ -99,13 +95,13 @@ class ProcessedView extends StatelessWidget {
                     ),
                   );
                 } else {
-                  switch(isRecent){
-                    case true :
+                  switch (isRecent) {
+                    case true:
                       return Container(
                           color: Colors.black,
                           alignment: Alignment.center,
                           child: Image.file(inputFile as File));
-                    default :
+                    default:
                       return FutureBuilder(
                         future: processImage(inputFile as File),
                         builder: (context, snapshot) {
@@ -140,7 +136,6 @@ class ProcessedView extends StatelessWidget {
                         },
                       );
                   }
-
                 }
               },
             ),
