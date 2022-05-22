@@ -7,7 +7,7 @@ MaskEraser
 
 # 시연 영상
 
-https://youtu.be/8WtbigG1bq0
+{% include video id="8WtbigG1bq0" provider="youtube" %}
 
 # 사용 라이브러리
 Back-end : Django, TensorFlow 등
