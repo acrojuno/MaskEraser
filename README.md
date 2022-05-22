@@ -7,9 +7,12 @@ MaskEraser
 
 # 사용 라이브러리
 Back-end : Django, TensorFlow 등
+
 Front-end : Flutter
 
 # 팀원
 이성도(20160228)
+
 민준호(20160823)
+
 레딘푹(20186048)
