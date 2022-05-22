@@ -4,13 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maskeraser/screens/GuideView.dart';
 import 'package:maskeraser/screens/MainView.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 void main() => runApp(Phoenix(
-      child: App(),
-    ));
+  child: App(),
+));
 
 class App extends StatelessWidget {
   @override
@@ -38,7 +36,8 @@ class MyApp extends StatelessWidget {
       designSize: Size(320, 533),
       minTextAdapt: true,
       //splitScreenMode: true,
-      builder: (_) => MaterialApp(
+      builder: (_, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         builder: (context, widget) {
           ScreenUtil.init(context);
           return MediaQuery(

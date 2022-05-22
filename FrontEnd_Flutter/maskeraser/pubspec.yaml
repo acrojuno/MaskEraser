@@ -35,7 +35,7 @@ dependencies:
   #갤러리에서 사진 불러오는 패키지
   image_picker: ^0.8.4+11
   #위젯들 반응형(스마트폰 화면 비율, 크기에 맞춰 자동으로 사이즈 조절)으로 만들어주는 패키지
-  flutter_screenutil: ^5.5.1
+  flutter_screenutil: ^5.5.0
   #http 통신할 때 쓰는 패키지
   dio: ^4.0.4
   #이미지 로딩 때 로딩하는 동글뱅이 띄울 때 필요한 패키지
@@ -50,12 +50,14 @@ dependencies:
   fluttertoast: ^8.0.9
   share_plus: ^4.0.4
   path_provider: ^2.0.9
-  gallery_saver: ^2.0.1
+  #gallery_saver: ^2.0.1
   #path: ^1.7.0
   pull_to_refresh: ^2.0.0
   introduction_screen: ^3.0.1
   flutter_phoenix: ^1.0.0
-  image_gallery_saver: ^1.7.1
+  #image_gallery_saver: ^1.7.1
+  permission_handler: ^9.2.0
+
 
 
 dev_dependencies:

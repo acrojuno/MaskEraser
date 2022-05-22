@@ -1,12 +1,14 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:maskeraser/screens/ProcessedView.dart';
-import 'package:maskeraser/utils/GalleryThumbnail.dart';
-import 'package:maskeraser/utils/captureCamera.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'package:maskeraser/screens/ProcessedView.dart';
+import 'package:maskeraser/utils/GalleryThumbnail.dart';
+import 'package:maskeraser/utils/captureCamera.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class Home extends StatefulWidget {
 List<AssetEntity> assets = [];
 List<FileSystemEntity> entities = [];
 
-RefreshController _refreshController = RefreshController(initialRefresh: false);
+RefreshController _refreshController = RefreshController(initialRefresh: true);
 
 class _HomeState extends State<Home> {
   Dio dio = new Dio();
@@ -65,7 +67,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    _fetch();
+    //_fetch();
     super.initState();
     //controller.addListener(scheduleRebuild);
   }
@@ -134,7 +136,7 @@ class _HomeState extends State<Home> {
                               isRecent: true,
                             ),
                           ),
-                        ).then((value) => {_fetch()});
+                        );
                       },
                       child: Container(
                         height: 150,

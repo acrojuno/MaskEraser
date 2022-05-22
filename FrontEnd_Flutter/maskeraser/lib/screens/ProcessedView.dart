@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:maskeraser/utils/processImage.dart';
-import 'package:maskeraser/utils/shareImageUrl.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:path/path.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'package:maskeraser/utils/processImage.dart';
+import 'package:maskeraser/utils/shareImageUrl.dart';
 
 class ProcessedView extends StatelessWidget {
   ProcessedView({
@@ -46,12 +47,23 @@ class ProcessedView extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: Icon(Icons.save),
+              icon: Icon(Icons.save), //저장 버튼
               onPressed: () async {
-                const deviceDir = '/storage/emulated/0/Download/';
-                var name = await basename(outputPath!);
-                await dio.download(outputPath!, join(deviceDir, name));
+                //저장소 권한 확인
+                var status = await Permission.storage.status;
+                if (!status.isGranted) {
+                  await Permission.storage.request();
+                }
 
+                //기기 내 다운로드 폴더 지정
+                const deviceDir = 'storage/self/primary/Download/';
+
+                //앱 내부 'ListViewImages' 폴더에 있는 해당 파일을 복사
+                File? file = await inputImg;
+                var name = await basename(file!.path);
+                file.copy('$deviceDir/$name');
+
+                //다운로드 완료 토스트 메시지 출력
                 Fluttertoast.showToast(
                   msg: '다운로드 완료',
                   fontSize: 20,

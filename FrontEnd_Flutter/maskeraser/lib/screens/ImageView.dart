@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:maskeraser/screens/ProcessedView.dart';
 
 class ImageView extends StatelessWidget {

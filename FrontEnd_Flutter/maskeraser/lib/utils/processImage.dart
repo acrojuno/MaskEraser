@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'sendForm.dart';
+import 'package:maskeraser/utils/sendForm.dart';
 
 Future<String> processImage(File? image) async {
   XFile img = XFile(image!.path);
