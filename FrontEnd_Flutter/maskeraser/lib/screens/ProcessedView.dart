@@ -59,11 +59,18 @@ class ProcessedView extends StatelessWidget {
 
                 //기기 내 다운로드 폴더 지정
                 const deviceDir = 'storage/self/primary/Download/';
+                var name;
 
-                //앱 내부 'ListViewImages' 폴더에 있는 해당 파일을 복사
-                File? file = await inputImg;
-                var name = await basename(file!.path);
-                file.copy('$deviceDir/$name');
+                //앱 상단 최근 이미지 위젯으로 접근할 때
+                if (isRecent == true) {
+                  //앱 내부 'ListViewImages' 폴더에 있는 해당 파일을 복사
+                  File? file = await inputImg;
+                  name = await basename(file!.path);
+                  file.copy('$deviceDir/$name');
+                } else { //사진 변환 직후일 때
+                  name = await basename(outputPath!);
+                  await dio.download(outputPath!, join(deviceDir, 'downloaded_${name}'));
+                }
 
                 //다운로드 완료 토스트 메시지 출력
                 Fluttertoast.showToast(
