@@ -18,6 +18,7 @@ class Home extends StatefulWidget {
 List<AssetEntity> assets = [];
 List<FileSystemEntity> entities = [];
 
+
 RefreshController _refreshController = RefreshController(initialRefresh: true);
 
 class _HomeState extends State<Home> {
@@ -60,7 +61,6 @@ class _HomeState extends State<Home> {
       ..sort((l, r) => l.statSync().modified.compareTo(r.statSync().modified));
     //테스트 해 보니 순서가 거꾸로 나와서 리스트를 한번 뒤집어 줌
     recentEntities = List.from(recentEntities.reversed);
-
     setState(() => entities = recentEntities);
     setState(() => assets = recentAssets);
   }

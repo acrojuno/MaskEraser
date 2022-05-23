@@ -34,6 +34,8 @@ class ProcessedView extends StatelessWidget {
           foregroundColor: Colors.white,
           backgroundColor: Colors.black,
           title: Text('Processed View'),
+
+
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
@@ -77,7 +79,8 @@ class ProcessedView extends StatelessWidget {
                 );
               },
             ),
-          ]),
+          ]
+      ),
       body: Container(
         color: Colors.black,
         //alignment: Alignment.center,
